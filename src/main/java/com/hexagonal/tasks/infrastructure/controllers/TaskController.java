@@ -35,7 +35,7 @@ public class TaskController {
     @GetMapping
     public ResponseEntity <List<Task>> getAllTaks(){
         List<Task> tasks = taskService.getAllTasks();
-        return new ResponseEntity(tasks, HttpStatus.OK);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PutMapping("/{taskId}")
@@ -45,7 +45,7 @@ public class TaskController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/taskId")
+    @DeleteMapping("/{taskId}")
     public ResponseEntity<Void> deleteTaskById(@PathVariable Long taskId){
         if(taskService.deleteTask(taskId)){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
