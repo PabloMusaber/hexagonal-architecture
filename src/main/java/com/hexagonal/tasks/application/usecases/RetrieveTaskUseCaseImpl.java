@@ -16,7 +16,7 @@ public class RetrieveTaskUseCaseImpl implements RetrieveTaskUseCase {
     }
 
     @Override
-    public Optional<Task> getTask(Long id) {
+    public Optional<Task> getTaskById(Long id) {
         return taskRepositoryPort.findById(id);
     }
 
