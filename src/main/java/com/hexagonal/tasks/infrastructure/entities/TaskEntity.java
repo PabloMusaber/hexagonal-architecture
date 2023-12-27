@@ -32,7 +32,7 @@ public class TaskEntity {
 
     //Substituir por un mapper
     public static TaskEntity fromDomainModel(Task task){
-        return new TaskEntity(task.getId(), task.getTitle(), task.getDescription(), task.getCreationDate(), task.isCompleted());
+        return new TaskEntity(task.getId(), task.getTitle(), task.getDescription(), LocalDateTime.now().truncatedTo(java.time.temporal.ChronoUnit.DAYS), task.isCompleted());
     }
 
     public Task toDomainModel(){
