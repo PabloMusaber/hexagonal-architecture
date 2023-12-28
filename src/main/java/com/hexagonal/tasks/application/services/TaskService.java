@@ -7,30 +7,24 @@ import com.hexagonal.tasks.domain.ports.in.*;
 import java.util.List;
 import java.util.Optional;
 
-public class TaskService implements CreateTaskUseCase, RetrieveTaskUseCase, UpdateTaskUseCase, DeleteTaskUseCase, GetAdditionalTaksInfoUseCase {
+public class TaskService implements TaskUseCases, GetAdditionalTaksInfoUseCase {
 
-    private final CreateTaskUseCase createTaskUseCase;
-    private final RetrieveTaskUseCase retrieveTaskUseCase;
-    private final DeleteTaskUseCase deleteTaskUseCase;
-    private final UpdateTaskUseCase updateTaskUseCase;
-    private final GetAdditionalTaksInfoUseCase getAdditionalTaksInfoUseCase;
+    private final TaskUseCases taskUseCases;
+    public final GetAdditionalTaksInfoUseCase getAdditionalTaksInfoUseCase;
 
-    public TaskService(CreateTaskUseCase createTaskUseCase, RetrieveTaskUseCase retrieveTaskUseCase, UpdateTaskUseCase updateTaskUseCase, DeleteTaskUseCase deleteTaskUseCase, GetAdditionalTaksInfoUseCase getAdditionalTaksInfoUseCase) {
-        this.createTaskUseCase = createTaskUseCase;
-        this.retrieveTaskUseCase = retrieveTaskUseCase;
-        this.updateTaskUseCase = updateTaskUseCase;
-        this.deleteTaskUseCase = deleteTaskUseCase;
+    public TaskService(TaskUseCases taskUseCases, GetAdditionalTaksInfoUseCase getAdditionalTaksInfoUseCase) {
+        this.taskUseCases = taskUseCases;
         this.getAdditionalTaksInfoUseCase = getAdditionalTaksInfoUseCase;
     }
 
     @Override
     public Task createTask(Task task) {
-        return createTaskUseCase.createTask(task);
+        return taskUseCases.createTask(task);
     }
 
     @Override
     public boolean deleteTask(Long id) {
-        return deleteTaskUseCase.deleteTask(id);
+        return taskUseCases.deleteTask(id);
     }
 
     @Override
@@ -40,16 +34,16 @@ public class TaskService implements CreateTaskUseCase, RetrieveTaskUseCase, Upda
 
     @Override
     public Optional<Task> getTaskById(Long id) {
-        return retrieveTaskUseCase.getTaskById(id);
+        return taskUseCases.getTaskById(id);
     }
 
     @Override
     public List<Task> getAllTasks() {
-        return retrieveTaskUseCase.getAllTasks();
+        return taskUseCases.getAllTasks();
     }
 
     @Override
     public Optional<Task> updateTask(Long id, Task updateTask) {
-        return updateTaskUseCase.updateTask(id, updateTask);
+        return taskUseCases.updateTask(id, updateTask);
     }
 }

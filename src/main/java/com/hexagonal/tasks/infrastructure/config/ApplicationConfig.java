@@ -16,13 +16,7 @@ public class ApplicationConfig {
 
     @Bean
     public TaskService taskService(TaskRepositoryPort taskRepositoryPort, GetAdditionalTaksInfoUseCase getAdditionalTaksInfoUseCase){
-        return new TaskService(
-                new CreateTaskUseCaseImpl(taskRepositoryPort),
-                new RetrieveTaskUseCaseImpl(taskRepositoryPort),
-                new UpdateTaskUseCaseImpl(taskRepositoryPort),
-                new DeleteTaskUseCaseImpl(taskRepositoryPort),
-                getAdditionalTaksInfoUseCase
-        );
+        return new TaskService(new TaskUseCasesImpl(taskRepositoryPort), getAdditionalTaksInfoUseCase);
     }
 
     @Bean
